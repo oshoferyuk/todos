@@ -1,3 +1,17 @@
-<h1>
-  {{title}}
-</h1>
+<div class="todoapp">
+<section class="todoapp">
+	<header class="header">
+		<h1>todos</h1>		
+		<input (keyup)="onKey($event)" class="new-todo" placeholder="What needs to be done?">	
+		<ul>
+			<li *ngFor="let todo of todos">
+				<app-todo-item [item]="todo" (todoCompleted)="todoDelete($event)"></app-todo-item>
+			</li>
+		</ul>
+	</header>
+</section>
+</div>
+<footer class="info">
+			<p>Double-click to edit a todo</p>
+			<p>Created by oshoferyuk using <a href="http://angular.io">Angular2</a></p>			
+</footer>
