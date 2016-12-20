@@ -10,7 +10,7 @@ import { routing } from './app.routing';
 import { HomeComponent } from './home/home.component';
 import { TodoDetailComponent } from './home/todo-detail/todo-detail.component';
 import { TodoEditComponent } from './home/todo-edit/todo-edit.component';
-
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,8 @@ import { TodoEditComponent } from './home/todo-edit/todo-edit.component';
     AboutComponent,
     HomeComponent,
     TodoDetailComponent,
-    TodoEditComponent
+    TodoEditComponent,
+    HighlightDirective,
   ],
   imports: [
     BrowserModule,
