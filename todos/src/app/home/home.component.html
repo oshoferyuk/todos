@@ -1,0 +1,9 @@
+<h1>todos</h1>		
+<input (keyup)="onKey($event)" class="new-todo" placeholder="What needs to be done?">	
+<ul>
+	<li *ngFor="let todo of todos">
+		<app-todo-item [item]="todo" (todoCompleted)="todoDelete($event)"></app-todo-item>
+	</li>
+</ul>
+<hr>
+<router-outlet></router-outlet>

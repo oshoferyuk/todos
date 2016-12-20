@@ -1,0 +1,7 @@
+.active2 
+{
+	color:rgba(175, 47, 47, 0.75) !important;
+}
+.active2>a:hover{
+	color:blue;
+}
