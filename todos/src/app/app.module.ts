@@ -11,6 +11,8 @@ import { HomeComponent } from './home/home.component';
 import { TodoDetailComponent } from './home/todo-detail/todo-detail.component';
 import { TodoEditComponent } from './home/todo-edit/todo-edit.component';
 import { HighlightDirective } from './directives/highlight.directive';
+import { HttpService } from './services/http.service';
+import { CrazyListComponent } from './crazy-list/crazy-list.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { HighlightDirective } from './directives/highlight.directive';
     TodoDetailComponent,
     TodoEditComponent,
     HighlightDirective,
+    CrazyListComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,7 @@ import { HighlightDirective } from './directives/highlight.directive';
     HttpModule,
     routing
   ],
-  providers: [],
+  providers: [HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

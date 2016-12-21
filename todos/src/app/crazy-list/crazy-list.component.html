@@ -1,0 +1,10 @@
+<p>
+  Async Todo list:
+</p>
+<ul>
+<li *ngFor="let todo of todoList | async">{{todo.todo}}</li>
+</ul>
+
+<!--<app-todo-item [item]="todo" (todoCompleted)="todoDelete($event)"></
+</app-todo-item> -->
+<!-- {{todoList | async | json}} -->
