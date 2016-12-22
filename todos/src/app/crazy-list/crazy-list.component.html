@@ -1,10 +1,16 @@
 <p>
-  Async Todo list:
+  Async Todo list2:
 </p>
 <ul>
-<li *ngFor="let todo of todoList | async">{{todo.todo}}</li>
-</ul>
+<li *ngFor="let item of todoList | async">
 
-<!--<app-todo-item [item]="todo" (todoCompleted)="todoDelete($event)"></
-</app-todo-item> -->
-<!-- {{todoList | async | json}} -->
+<app-todo-item [item]="{name:item.todo, description:item.description, done: item.done}" (todoCompleted)="todoDelete($event)"></app-todo-item>
+</li>
+</ul>
+<button (click)="DoneFirst()">Done First*</button> |
+<button (click)="DoneLast()">Done Last</button> |
+<button (click)="MergeGroup()">Order of arriving(merge)</button> |
+<button (click)="SwitchGroup()">SwitchLatest Group</button> |
+<button class="zzz" id="canelTst" #cancel (click)="Cancel()">CANCEL</button>
+<hr>
+* = cancable

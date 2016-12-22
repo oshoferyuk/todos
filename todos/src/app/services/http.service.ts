@@ -21,6 +21,8 @@ private testurl:string = "https://todo-db834.firebaseio.com/todos1.json";
 
   	constructor(private http: Http) { }
 
+  	private cancel$:Observable<any> = Observable.empty();
+
   	private getRandomTime():number{
   		return Math.random()*3000;
   	}
@@ -35,7 +37,7 @@ private testurl:string = "https://todo-db834.firebaseio.com/todos1.json";
 	
   	private getResult(obs$:Observable<any>):Observable<any>{
 		return obs$.map((r:Response) => r.json()).map(log => {
-console.log(log);
+			console.log(log);
 			return log;
 		});
 
@@ -113,14 +115,72 @@ console.log(log);
 
 
 
+//Subject
+/*
+let subject = new Rx.Subject();
+var subscription = subject.subscribe(
+    function (x) { console.log('onNext: ' + x); },
+    function (e) { console.log('onError: ' + e.message); },
+    function () { console.log('onCompleted'); });
+
+
+subject.onNext(1);
+// => onNext: 1
+subject.onNext(2);
+// => onNext: 2
+subject.onCompleted();
+// => onCompleted
+subscription.dispose();
+*/
+
+
+
+
+	public doneFirst(cancel$:Observable<any>): Observable<any>{					
+		let todoDone$:Observable<any> = this.getTodo$(this.urls1);
+  		let todoNotDone$:Observable<any> = this.getTodo$(this.urls2);  		
+  		let todoR$:Observable<any> = this.concat(todoDone$, todoNotDone$, false);
+		return this.getResult(todoR$.takeUntil(cancel$).concatAll()).reduce((acc,cur) => acc.concat(cur));
+	}
+
+	public doneLast(): Observable<any>{		
+		let todoDone$:Observable<any> = this.getTodo$(this.urls1);
+  		let todoNotDone$:Observable<any> = this.getTodo$(this.urls2);  		
+  		let todoR$:Observable<any> = this.concat(todoDone$, todoNotDone$, true);
+		return this.getResult(todoR$.concatAll()).reduce((acc,cur) => acc.concat(cur));
+	}
+
+
+	public mergeGroup(): Observable<any>{
+		let todoDone$:Observable<any> = this.getTodo$(this.urls1);
+  		let todoNotDone$:Observable<any> = this.getTodo$(this.urls2);  		
+  		let todoR$:Observable<any> = this.merge(todoDone$, todoNotDone$);
+		return this.getResult(todoR$.concatAll()).reduce((acc,cur) => acc.concat(cur));
+	}
+
+
+	public switchGroup(): Observable<any>{
+		let todoDone$:Observable<any> = this.getTodo$(this.urls1);
+  		let todoNotDone$:Observable<any> = this.getTodo$(this.urls2);  		
+  		let todoR$:Observable<any> = this.switchLatestGroup(todoDone$, todoNotDone$);
+		return this.getResult(todoR$.concatAll()).reduce((acc,cur) => acc.concat(cur));
+	}
+
+
+//NOT works, too late
+	public setCancelation(cancel$:Observable<any>){
+		this.cancel$ = cancel$;
+	}
+
+
 	public getTestData(): Observable<any>{  	
   		let todoDone$:Observable<any> = this.getTodo$(this.urls1);
   		let todoNotDone$:Observable<any> = this.getTodo$(this.urls2);  		
-  		//let todoR$:Observable<any> = this.concat(todoDone$, todoNotDone$, false);
-  		let todoR$:Observable<any> = this.merge(todoDone$, todoNotDone$);
+  		let todoR$:Observable<any> = this.concat(todoDone$, todoNotDone$, false);
+  		//let todoR$:Observable<any> = this.merge(todoDone$, todoNotDone$);
 		//let todoR$:Observable<any> = this.getNumber2(todoDone$);
 
-		//let tR$ = todoR$.reduce((acc, cur) => {return Observable.of(acc,cur)});		
+		//let tR$ = todoR$.reduce((acc, cur) => {return Observable.of(acc,cur)});
 		
 		return this.getResult(todoR$.concatAll()).reduce((acc,cur) => acc.concat(cur));
   		

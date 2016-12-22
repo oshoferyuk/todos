@@ -1,5 +1,5 @@
 <div class="view">
-	<input type="checkbox" data-off-icon-cls="gluphicon-thumbs-down" data-on-icon-cls="gluphicon-thumbs-up">	
+	<input type="checkbox" data-off-icon-cls="gluphicon-thumbs-down" data-on-icon-cls="gluphicon-thumbs-up" [checked]="item.done == 'true' ">	
 	<label highlight (dblclick)="detailHandler(item)" #itemLbl> {{item.name}}</label>
 	<input type="button" (click)="destroyHandler(item)" value="X"/>
 </div>
