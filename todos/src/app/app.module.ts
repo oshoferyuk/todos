@@ -7,6 +7,7 @@ import { TodoItemComponent } from './todo-item/todo-item.component';
 import { HeaderComponent } from './header/header.component';
 import { AboutComponent } from './about/about.component';
 import { routing } from './app.routing';
+import { SubjectformComponent } from './subjectform/subjectform.component';
 import { HomeComponent } from './home/home.component';
 import { TodoDetailComponent } from './home/todo-detail/todo-detail.component';
 import { TodoEditComponent } from './home/todo-edit/todo-edit.component';
@@ -14,17 +15,19 @@ import { HighlightDirective } from './directives/highlight.directive';
 import { HttpService } from './services/http.service';
 import { CrazyListComponent } from './crazy-list/crazy-list.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     TodoItemComponent,
     HeaderComponent,
     AboutComponent,
+    SubjectformComponent,
     HomeComponent,
     TodoDetailComponent,
     TodoEditComponent,
     HighlightDirective,
-    CrazyListComponent
+    CrazyListComponent    
   ],
   imports: [
     BrowserModule,

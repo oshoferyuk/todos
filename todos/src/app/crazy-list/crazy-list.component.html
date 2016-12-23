@@ -1,6 +1,4 @@
-<p>
-  Async Todo list2:
-</p>
+<h1>Rx List & Subject</h1>
 <ul>
 <li *ngFor="let item of todoList | async">
 
@@ -11,6 +9,14 @@
 <button (click)="DoneLast()">Done Last</button> |
 <button (click)="MergeGroup()">Order of arriving(merge)</button> |
 <button (click)="SwitchGroup()">SwitchLatest Group</button> |
-<button class="zzz" id="canelTst" #cancel (click)="Cancel()">CANCEL</button>
+<button #cancel (click)="Cancel()">CANCEL</button>
 <hr>
+<button (click)="GetAllAtOnce()">All at once</button> |
+
 * = cancable
+
+<label>Subjects: 
+<input type="checkbox" [(ngModel)]="subjectChk" /></label><br/>
+<span *ngIf="subjectChk" class="animate-if">  
+  <app-subjectform (subjectTodo)="GetTodoSubject($event)"></app-subjectform>
+</span>

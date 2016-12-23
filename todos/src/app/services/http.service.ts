@@ -9,41 +9,21 @@ import {Observable} from "rxjs";
 export class HttpService {
 
 
-private urls1:string[] = ["https://todo-db834.firebaseio.com/todos1.json",
-				           "https://todo-db834.firebaseio.com/todos1.json",
-				           "https://todo-db834.firebaseio.com/todos1.json"];
+	private urls1:string[] = ["https://todo-db834.firebaseio.com/todos1.json",
+					           "https://todo-db834.firebaseio.com/todos1.json",
+					           "https://todo-db834.firebaseio.com/todos1.json"];
 
-private urls2:string[] = ["https://todo-db834.firebaseio.com/todos2.json",
-			              "https://todo-db834.firebaseio.com/todos2.json",
-			              "https://todo-db834.firebaseio.com/todos2.json"];
+	private urls2:string[] = ["https://todo-db834.firebaseio.com/todos2.json",
+				              "https://todo-db834.firebaseio.com/todos2.json",
+				              "https://todo-db834.firebaseio.com/todos2.json"];
 
-private testurl:string = "https://todo-db834.firebaseio.com/todos1.json";
+	private urls = this.urls1.concat(this.urls2);
+	private testurl1:string = "https://todo-db834.firebaseio.com/todos1.json";
+	private testurl2:string = "https://todo-db834.firebaseio.com/todos2.json";
 
   	constructor(private http: Http) { }
-
-  	private cancel$:Observable<any> = Observable.empty();
-
-  	private getRandomTime():number{
-  		return Math.random()*3000;
-  	}
-
-  	private getTodo$(urls:string[]):Observable<any>{
-		return Observable
-	  		.interval(this.getRandomTime())
-	  		.take(urls.length)
-	  		.map(i => this.http.get(urls[i]));
-  	}
   	
-	
-  	private getResult(obs$:Observable<any>):Observable<any>{
-		return obs$.map((r:Response) => r.json()).map(log => {
-			console.log(log);
-			return log;
-		});
-
-  	}
-
-/* Main combination strategies: concat, merge and switch
+	/* Main combination strategies: concat, merge and switch
 
   	/** CONCAT STRATEGY
 	//------1---1---1-------
@@ -87,7 +67,7 @@ private testurl:string = "https://todo-db834.firebaseio.com/todos1.json";
 	}
 
 
-//TODO: switch().switch();
+
 
 	/** SWITCH LATEST item
 	//------1---1---1-------
@@ -100,7 +80,7 @@ private testurl:string = "https://todo-db834.firebaseio.com/todos1.json";
 	}  	  
 
 
-//Main modification function: map, zip, filter, reduce, concatAll
+//Main modification function: map, zip, filter, reduce, concatAll, scan
 
 
 	//filter
@@ -110,35 +90,18 @@ private testurl:string = "https://todo-db834.firebaseio.com/todos1.json";
 	}	
 
 	//zip
-
-
-
-
-
-//Subject
-/*
-let subject = new Rx.Subject();
-var subscription = subject.subscribe(
-    function (x) { console.log('onNext: ' + x); },
-    function (e) { console.log('onError: ' + e.message); },
-    function () { console.log('onCompleted'); });
-
-
-subject.onNext(1);
-// => onNext: 1
-subject.onNext(2);
-// => onNext: 2
-subject.onCompleted();
-// => onCompleted
-subscription.dispose();
-*/
-
-
-
+	private getPart(obs$:Observable<any>):Observable<any>{
+		return Observable.zip(
+  			this.http.get(this.testurl1),
+  			this.http.get(this.testurl2),
+  			function(res1, res2){  				
+  				return res2.json().concat(res1.json());
+  			});
+	}
 
 	public doneFirst(cancel$:Observable<any>): Observable<any>{					
 		let todoDone$:Observable<any> = this.getTodo$(this.urls1);
-  		let todoNotDone$:Observable<any> = this.getTodo$(this.urls2);  		
+  		let todoNotDone$:Observable<any> = this.getTodo$(this.urls2);
   		let todoR$:Observable<any> = this.concat(todoDone$, todoNotDone$, false);
 		return this.getResult(todoR$.takeUntil(cancel$).concatAll()).reduce((acc,cur) => acc.concat(cur));
 	}
@@ -166,28 +129,47 @@ subscription.dispose();
 		return this.getResult(todoR$.concatAll()).reduce((acc,cur) => acc.concat(cur));
 	}
 
+	public getAllAtOnce(): Observable<any>{
+		return this.allAtOnce$().map(r => this.getResult(r)).concatAll().reduce((acc,cur) => acc.concat(cur));
+	}
 
-//NOT works, too late
-	public setCancelation(cancel$:Observable<any>){
-		this.cancel$ = cancel$;
+	public getTestData(): Observable<any>{  	
+		//return Observable.empty();
+  		
+	return this.getPart(this.allAtOnce$());
+  }
+
+//////////////////////////////////////////////////////////////////////////
+
+	private cancel$:Observable<any> = Observable.empty();
+
+  	private getRandomTime():number{
+  		return Math.random()*3000;
+  	}
+
+  	private getTodo$(urls:string[]):Observable<any>{
+		return Observable
+	  		.interval(this.getRandomTime())
+	  		.take(urls.length)
+	  		.map(i => this.http.get(urls[i]));
+  	}
+  	
+	private allAtOnce$():Observable<any>{		
+		return Observable.forkJoin(			
+			this.http.get(this.urls[0]),
+			this.http.get(this.urls[1]),
+			this.http.get(this.urls[2]),
+			this.http.get(this.urls[3]),
+			this.http.get(this.urls[4]),
+			this.http.get(this.urls[5]));
 	}
 
 
-	public getTestData(): Observable<any>{  	
-  		let todoDone$:Observable<any> = this.getTodo$(this.urls1);
-  		let todoNotDone$:Observable<any> = this.getTodo$(this.urls2);  		
-  		let todoR$:Observable<any> = this.concat(todoDone$, todoNotDone$, false);
-  		//let todoR$:Observable<any> = this.merge(todoDone$, todoNotDone$);
-		//let todoR$:Observable<any> = this.getNumber2(todoDone$);
+  	private getResult(obs$:Observable<any>):Observable<any>{
+		return obs$.map((r:Response) => r.json()).map(log => {
+			console.log(log);
+			return log;
+		});
 
-		//let tR$ = todoR$.reduce((acc, cur) => {return Observable.of(acc,cur)});
-		
-		return this.getResult(todoR$.concatAll()).reduce((acc,cur) => acc.concat(cur));
-  		
-  		//return this.getResult(todoR$.flatMap((r:Response) => r.json()));
-  		//return this.getResult(test.concatAll());
-
-
-  		//return this.http.get(this.testurl).map((response:Response) => response.json());
-  }
+  	}
 }
