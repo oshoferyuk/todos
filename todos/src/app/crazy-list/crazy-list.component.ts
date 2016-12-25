@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpService } from '../services/http.service';
 import { Response } from "@angular/http";
-import {Observable, Subject, ReplaySubject, BehaviorSubject} from "rxjs";
+import {Observable, Subject, AsyncSubject, BehaviorSubject, ReplaySubject} from "rxjs";
 
 import 'rxjs/Rx';
 import { ITodo } from '../model/TodoModel';
@@ -15,7 +15,7 @@ export class CrazyListComponent implements OnInit {
 
   subjectChk:boolean;
   todoList:Observable<any>;
-  bSubject:Subject<any>;
+  subject:Subject<any>;
 
   @ViewChild('cancel') cancelEl;
 
@@ -23,9 +23,16 @@ export class CrazyListComponent implements OnInit {
 
 	ngOnInit() {
 	  	this.todoList = this.httpService.getAllAtOnce(); //.subscribe((data:any) => console.log(data));  	  	
-	  	//this.bSubject = new BehaviorSubject([]); 
-		this.bSubject = new ReplaySubject(2 /*buffer size*/); 	  	
-	}
+	  	//this.subject = new AsyncSubject();
+	  	//this.subject = new BehaviorSubject([]); 
+		this.subject = new ReplaySubject(2 /*buffer size*/); 	  	
+
+		
+		
+		this.subject.subscribe((r) => { console.log(r);},
+    							(err) => {},
+    							() => {});
+			}
 
  	DoneFirst(){ 		 		 		 			
 		let cancel$ = Observable.fromEvent(this.cancelEl.nativeElement, 'click');
@@ -49,22 +56,11 @@ export class CrazyListComponent implements OnInit {
 	}
 
 
-	GetTodoSubject(todo:any){					
-		
-		this.bSubject.next([todo]);
-		this.bSubject.next([todo]);
-		this.bSubject.next([todo]);
-
-this.todoList = this.bSubject;
-		//this.bSubject.forEach(e => console.log(e));
-
-		
-
-	/*
-bSubject.subscribe((value) => {
-  console.log("Subscription got", value);
-	});
-*/
+	GetTodoSubject(todo:any){						
+		this.subject.next([todo]);
+		this.subject.next([todo]);
+		this.subject.next([todo]);
+		this.subject.complete();			
 	}
 
 

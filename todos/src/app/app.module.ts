@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { TodoItemComponent } from './todo-item/todo-item.component';
@@ -14,6 +15,7 @@ import { TodoEditComponent } from './home/todo-edit/todo-edit.component';
 import { HighlightDirective } from './directives/highlight.directive';
 import { HttpService } from './services/http.service';
 import { CrazyListComponent } from './crazy-list/crazy-list.component';
+import { DdFormComponent } from './dd-form/dd-form.component';
 
 
 @NgModule({
@@ -27,11 +29,13 @@ import { CrazyListComponent } from './crazy-list/crazy-list.component';
     TodoDetailComponent,
     TodoEditComponent,
     HighlightDirective,
-    CrazyListComponent    
+    CrazyListComponent,
+    DdFormComponent    
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     routing
   ],
