@@ -7,8 +7,7 @@ import {Observable} from "rxjs";
 
 @Injectable()
 export class HttpService {
-
-
+    
 	private urls1:string[] = ["https://todo-db834.firebaseio.com/todos1.json",
 					           "https://todo-db834.firebaseio.com/todos1.json",
 					           "https://todo-db834.firebaseio.com/todos1.json"];
@@ -81,7 +80,6 @@ export class HttpService {
 
 
 //Main modification function: map, zip, filter, reduce, concatAll, scan
-
 
 	//filter
 	private getNumber2(obs1$:Observable<any>)
