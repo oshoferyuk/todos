@@ -14,5 +14,7 @@ export class SubjectformComponent implements OnInit {
   }
 	onSubmit(form:NgForm){	
 		this.subjectTodo.emit(form.value);
+		console.log('lets valueChange(s) this form! ');
+		form.valueChanges.forEach((c)=>console.log(c));
 	}
 }
