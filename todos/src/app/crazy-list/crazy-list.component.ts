@@ -28,10 +28,6 @@ export class CrazyListComponent implements OnInit {
 		this.subject = new ReplaySubject(2 /*buffer size*/); 	  	
 
 		
-		
-		this.subject.subscribe((r) => { console.log(r);},
-    							(err) => {},
-    							() => {});
 			}
 
  	DoneFirst(){ 		 		 		 			
@@ -60,7 +56,12 @@ export class CrazyListComponent implements OnInit {
 		this.subject.next([todo]);
 		this.subject.next([todo]);
 		this.subject.next([todo]);
-		this.subject.complete();			
+		this.subject.complete();	
+
+this.subject.subscribe((r) => { console.log(r);},
+    							(err) => {},
+    							() => {});			
+
 	}
 
 

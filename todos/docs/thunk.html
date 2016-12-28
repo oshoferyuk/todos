@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Thunk</title>
+</head>
+<body>
+<h2>
+*** THUNK DEMYSTIFICATION ***
+</h2>
+<p>
+Lets see why thunk useful and why they needed.
+
+Thunk is just wrapper around some function.
+example of sync thunks:
+</p>
+
+function add(a,b){
+	return a + b;
+}
+
+function thunk_add_3_5(){
+	return add(3,5);
+}
+
+thunk_add_3_5(); //8.
+Quite similar to carrying.
+
+function thunk_add_3(a){
+	return add(3,a);
+}
+
+thunk_add_3(6);//9
+<p>
+Nothing new so far, all carry functions could be considered as thunks.
+
+Lets see examples of async thunks:
+</p>
+function fakeAjax(param, cb){
+	setTimeout(function(){
+		cb(param);
+	},4000)
+}
+
+function thunk1(cb){
+	return fakeAjax(1, cb);
+}
+
+//thunk1(console.log('test'))//....test
+<p>
+Write a function which return thunk, in this case we move parameters
+outside thunk:
+</p>
+
+function thunk_wrapper(a){		
+	return function thunk(cb){
+		fakeAjax(a, cb);
+	}
+}
+
+//thunk_wrapper(3)(function(a){console.log(a)})//....3
+<p>
+Everything works fine, but all previous thunks are lazy. It means
+they are invoked only when we invoke it. Lets try to make them eager.
+</p>
+
+1. Move async function outside of thunk.
+
+function thunk3(a){		
+	var fn;
+	fakeAjax(3, fn); // *1 
+	return function(cb){
+		fn = cb; // *2
+	}
+}
+<p>
+This seems to be working, number *1 will ask for fn after *2, but
+at the time of invocation fn is undefined.
+</p>
+
+<p>
+To solve it using closure. We can define variable fn and then we can
+assign it in thunk and access it in callback of fakeAjax
+</p>
+function thunk_wrapper4(a){		
+	var fn;
+	fakeAjax(a, function(result){		
+		fn(result);
+	});
+	return function thunk(cb){
+		fn = cb;
+	}
+}
+
+
+//thunk4(4)(function(a){console.log(a)});
+//thunk4(4); //fail!
+
+
+function thunk5(a){		
+	var fn;
+	fakeAjax(a, function(result){		
+		if(fn) fn(result);
+	});
+	return function(cb){
+		fn = cb;
+	}
+}
+
+var th = thunk5(4); //has no error, but 
+th(function(a){console.log(a)}); //no result
+
+
+function thunk6(a){		
+	var fn, res;
+	fakeAjax(a, function(result){		
+		if(fn) fn(result);
+		else res = result;
+	});
+	return function(cb){
+		if(res) cb(res);
+		else fn = cb;
+	}
+}
+
+var th = thunk5(4); //has no error, but 
+
+
+th(function(a){console.log(a)}); //no result
+
+//var th = thunk5(4); //has no error, but 
+//th(function(a){console.log(a)});
+
+</body>
+</html>

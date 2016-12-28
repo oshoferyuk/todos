@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import {Observable} from "rxjs";
+import {Observable, Notification } from "rxjs";
 
 //import { Observable } from "rxjs/Observable";
 
@@ -45,8 +45,10 @@ export class HttpService {
 	///--------------------a-a-1-1-a-1-- or similar
   	 */
   	private merge(obs1$:Observable<any>, obs2$:Observable<any>)
-  	:Observable<any>{  	
-  			return Observable.merge(obs1$, obs2$);  	
+  	:Observable<any>{  	  	
+  		let error:Notification<any> = Notification.createError(new Error('test'));
+  			
+  			return Observable.merge(obs1$, /*error.toObservable(),*/ obs2$);
 	}
 
 
