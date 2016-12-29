@@ -1,0 +1,33 @@
+lifting pattern
+If we need to adapt async programming technics from low level to more upper
+level. From cb -> thunk, or cb -> promise, or promise -> observable.
+
+Example:
+
+
+function fakeAjax(param, cb){
+	setTimeout(function(){
+		cb(param);
+	}, 3000);
+}
+
+
+
+function output(text){
+	console.log(text);
+}
+
+function promiseLifting(param){
+	return new Promise(function(resolve, reject){
+		return fakeAjax(param,resolve);
+	})
+}
+
+var p1 = promiseLifting(66);
+var p2 = promiseLifting(77);
+
+p1
+	.then(output)
+	.then(function(){return p2})
+	.then(output)
+
