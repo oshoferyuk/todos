@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ComponentCanDeactivate } from './about.guard';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent implements OnInit, ComponentCanDeactivate {  
+  
+	private isConf: boolean = false;
+  
 
   constructor(private router:Router) { }
 
@@ -15,5 +19,10 @@ export class AboutComponent implements OnInit {
   
   goHome(){	
 	this.router.navigate(['/']);
+  }
+
+  canDeactivate(){  
+  	console.log('deactivate guard value: ',this.isConf);
+  	return this.isConf;
   }
 }

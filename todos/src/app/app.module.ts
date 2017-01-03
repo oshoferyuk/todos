@@ -16,7 +16,9 @@ import { HighlightDirective } from './directives/highlight.directive';
 import { HttpService } from './services/http.service';
 import { CrazyListComponent } from './crazy-list/crazy-list.component';
 import { DdFormComponent } from './dd-form/dd-form.component';
-
+import { MaterialModule } from '@angular/material'
+import { FormDDGuard, DialogResultExampleDialog } from './dd-form/dd-form.guard';
+import { AboutGuard } from './about/about.guard';
 
 @NgModule({
   declarations: [
@@ -30,16 +32,20 @@ import { DdFormComponent } from './dd-form/dd-form.component';
     TodoEditComponent,
     HighlightDirective,
     CrazyListComponent,
-    DdFormComponent    
+    DdFormComponent,
+    DialogResultExampleDialog
   ],
+  entryComponents: [DialogResultExampleDialog],
+
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    MaterialModule.forRoot(),
     routing
   ],
-  providers: [HttpService],
+  providers: [HttpService, FormDDGuard, AboutGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
