@@ -19,6 +19,16 @@ import { DdFormComponent } from './dd-form/dd-form.component';
 import { MaterialModule } from '@angular/material'
 import { FormDDGuard, DialogResultExampleDialog } from './dd-form/dd-form.guard';
 import { AboutGuard } from './about/about.guard';
+import { InteractionComponent } from './interaction/interaction.component';
+import { HeroParentComponent } from './interaction/hero-parent/hero-parent.component';
+import { HeroSlaveComponent } from './interaction/hero-parent/hero-slave/hero-slave.component';
+import { HeroParentSetterComponent } from './interaction/hero-parent-setter/hero-parent-setter.component';
+import { HeroSlaveSetterComponent } from './interaction/hero-parent-setter/hero-slave-setter/hero-slave-setter.component';
+import { CounterComponent } from './interaction/counter/counter.component';
+import { ChangeDetectionComponent } from './interaction/counter/change-detection/change-detection.component';
+import { CounterLvComponent } from './interaction/counter-lv/counter-lv.component';
+import { HeroParentServiceComponent } from './interaction/hero-parent-service/hero-parent-service.component';
+import { HeroSlaveServiceComponent } from './interaction/hero-parent-service/hero-slave-service/hero-slave-service.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +43,17 @@ import { AboutGuard } from './about/about.guard';
     HighlightDirective,
     CrazyListComponent,
     DdFormComponent,
-    DialogResultExampleDialog
+    DialogResultExampleDialog,
+    InteractionComponent,
+    HeroParentComponent,
+    HeroSlaveComponent,
+    HeroParentSetterComponent,
+    HeroSlaveSetterComponent,
+    CounterComponent,
+    ChangeDetectionComponent,
+    CounterLvComponent,
+    HeroParentServiceComponent,
+    HeroSlaveServiceComponent
   ],
   entryComponents: [DialogResultExampleDialog],
 

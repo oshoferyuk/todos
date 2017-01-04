@@ -1,0 +1,23 @@
+<h1>Component Communication</h1>
+
+<b>parent-child input binding</b><br/>
+<app-hero-parent></app-hero-parent>
+<br/>
+
+<b>parent-child input binding with setter </b><br/>
+<hero-parent-setter></hero-parent-setter>
+<br/>
+
+<b>input with ngOnChanges </b><br/>
+<app-counter></app-counter>
+<br/>
+
+<b>parent-child via local variable</b><br/>
+<app-counter-lv #count></app-counter-lv>
+<button md-button (click)="count.minus()">Minus</button>
+<br/>
+
+<b>parent-child via ViewChild</b><br/>
+<button md-button (click)="minus()">Minus</button>
+
+

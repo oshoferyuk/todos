@@ -7,11 +7,13 @@ import { AboutComponent } from './about/about.component';
 import { HOME_ROUTES } from './home/home.routes';
 import { FormDDGuard } from './dd-form/dd-form.guard';
 import { AboutGuard } from './about/about.guard';
+import { InteractionComponent } from './interaction/interaction.component';
 
 const APP_ROUTES: Routes = [
 	{ path:'', component: HomeComponent },
 	{ path:'', component: HomeComponent, children: HOME_ROUTES },
 	{ path:'crazylist', component: CrazyListComponent },
+	{ path:'interaction', component: InteractionComponent },
 	{ path:'ddform', component: DdFormComponent, canActivate: [FormDDGuard]},
 	{ path:'about', component: AboutComponent, canDeactivate: [AboutGuard]},
 

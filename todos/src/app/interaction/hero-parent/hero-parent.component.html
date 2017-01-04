@@ -1,0 +1,17 @@
+<p>
+  Hi, Im {{master}}
+  I have slaves:
+</p>
+  <ul>
+	<li *ngFor="let slave of slaves">
+		<app-hero-slave [name]="slave.name" [master]="master"
+		(onVoted)="vote($event)">			
+		</app-hero-slave>		
+	</li>
+  </ul>
+<app-hero-slave *ngFor="let slave2 of slaves"
+[name]="slave2.name" [master]="slave2.master"
+(onVoted)="vote($event)">	
+</app-hero-slave>
+
+

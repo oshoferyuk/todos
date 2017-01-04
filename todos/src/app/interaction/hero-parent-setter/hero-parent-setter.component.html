@@ -1,0 +1,9 @@
+<p>
+  Hi, Im {{master}}
+  I have slaves:
+</p>
+  
+<app-hero-slave-setter *ngFor="let slave2 of slaves"
+[name]="slave2.name" [master]="slave2.master">	
+</app-hero-slave-setter>
+
