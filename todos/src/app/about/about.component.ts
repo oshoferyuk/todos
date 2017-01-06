@@ -11,14 +11,13 @@ export class AboutComponent implements OnInit, ComponentCanDeactivate {
   
 	private isConf: boolean = false;
   
-
   constructor(private router:Router) { }
 
   ngOnInit() {
   }
   
-  goHome(){	
-	this.router.navigate(['/']);
+  goHome(){	    
+	  this.router.navigate(['/']);
   }
 
   canDeactivate(){  

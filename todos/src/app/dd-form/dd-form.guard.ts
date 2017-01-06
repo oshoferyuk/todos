@@ -1,20 +1,24 @@
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot  } from '@angular/router';
 import {Observable } from "rxjs";
 import {MdDialog, MdDialogRef} from '@angular/material';
-
+import { AuthService } from '../auth/auth.service';
 import { Injectable } from '@angular/core';
 import {Component} from '@angular/core';
 
 @Injectable()
 export class FormDDGuard implements CanActivate {	
 	
- constructor(public dialog: MdDialog) {}
+ constructor(public dialog: MdDialog, private auth:AuthService) {}
 
  canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean>|Promise<boolean>|boolean {    	
-    	 let dialogRef = this.dialog.open(DialogResultExampleDialog);
+       if(!this.auth.isAuth()){
+         alert('Please sign in to see this section');
+         return false;
+       }   	 
+       let dialogRef = this.dialog.open(DialogResultExampleDialog);
     		return dialogRef.afterClosed();
     	
 

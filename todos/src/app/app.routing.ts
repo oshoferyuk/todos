@@ -21,7 +21,9 @@ const APP_ROUTES: Routes = [
 	
 
 	{ path:'signin', component: SinginComponent },
-	{ path:'signup', component: SingupComponent }
+	{ path:'signup', component: SingupComponent },
+	{ path:'signout', component: HomeComponent }
+
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);
