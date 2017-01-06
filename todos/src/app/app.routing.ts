@@ -8,6 +8,8 @@ import { HOME_ROUTES } from './home/home.routes';
 import { FormDDGuard } from './dd-form/dd-form.guard';
 import { AboutGuard } from './about/about.guard';
 import { InteractionComponent } from './interaction/interaction.component';
+import { SinginComponent } from './auth/singin.component';
+import { SingupComponent } from './auth/singup.component';
 
 const APP_ROUTES: Routes = [
 	{ path:'', component: HomeComponent },
@@ -16,7 +18,10 @@ const APP_ROUTES: Routes = [
 	{ path:'interaction', component: InteractionComponent },
 	{ path:'ddform', component: DdFormComponent, canActivate: [FormDDGuard]},
 	{ path:'about', component: AboutComponent, canDeactivate: [AboutGuard]},
+	
 
+	{ path:'signin', component: SinginComponent },
+	{ path:'signup', component: SingupComponent }
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

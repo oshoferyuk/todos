@@ -29,6 +29,10 @@ import { ChangeDetectionComponent } from './interaction/counter/change-detection
 import { CounterLvComponent } from './interaction/counter-lv/counter-lv.component';
 import { HeroParentServiceComponent } from './interaction/hero-parent-service/hero-parent-service.component';
 import { HeroSlaveServiceComponent } from './interaction/hero-parent-service/hero-slave-service/hero-slave-service.component';
+import { SinginComponent } from './auth/singin.component';
+import { FooterComponent } from './footer/footer.component';
+import { SingupComponent } from './auth/singup.component';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,10 @@ import { HeroSlaveServiceComponent } from './interaction/hero-parent-service/her
     ChangeDetectionComponent,
     CounterLvComponent,
     HeroParentServiceComponent,
-    HeroSlaveServiceComponent
+    HeroSlaveServiceComponent,
+    SinginComponent,
+    FooterComponent,
+    SingupComponent
   ],
   entryComponents: [DialogResultExampleDialog],
 
@@ -65,7 +72,7 @@ import { HeroSlaveServiceComponent } from './interaction/hero-parent-service/her
     MaterialModule.forRoot(),
     routing
   ],
-  providers: [HttpService, FormDDGuard, AboutGuard],
+  providers: [HttpService, FormDDGuard, AboutGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
