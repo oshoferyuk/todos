@@ -11,9 +11,10 @@ import { InteractionComponent } from './interaction/interaction.component';
 import { SinginComponent } from './auth/singin.component';
 import { SingupComponent } from './auth/singup.component';
 
+
 const APP_ROUTES: Routes = [
 	{ path:'', component: HomeComponent },
-	{ path:'', component: HomeComponent, children: HOME_ROUTES },
+	//{ path:'', component: HomeComponent, children: HOME_ROUTES },
 	{ path:'crazylist', component: CrazyListComponent },
 	{ path:'interaction', component: InteractionComponent },
 	{ path:'ddform', component: DdFormComponent, canActivate: [FormDDGuard]},
@@ -22,7 +23,9 @@ const APP_ROUTES: Routes = [
 
 	{ path:'signin', component: SinginComponent },
 	{ path:'signup', component: SingupComponent },
-	{ path:'signout', component: HomeComponent }
+	{ path:'signout', component: HomeComponent },
+
+    { path: 'master', loadChildren:'app/master/master.module#MasterModule' }
 
 ];
 

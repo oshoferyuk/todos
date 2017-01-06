@@ -33,6 +33,7 @@ import { SinginComponent } from './auth/singin.component';
 import { FooterComponent } from './footer/footer.component';
 import { SingupComponent } from './auth/singup.component';
 import { AuthService } from './auth/auth.service';
+import {MasterModule} from './master/master.module';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,7 @@ import { AuthService } from './auth/auth.service';
     HeroSlaveServiceComponent,
     SinginComponent,
     FooterComponent,
-    SingupComponent
+    SingupComponent    
   ],
   entryComponents: [DialogResultExampleDialog],
 
@@ -70,8 +71,7 @@ import { AuthService } from './auth/auth.service';
     ReactiveFormsModule,
     HttpModule,
     MaterialModule.forRoot(),
-    routing
-  ],
+    routing],
   providers: [HttpService, FormDDGuard, AboutGuard, AuthService],
   bootstrap: [AppComponent]
 })
