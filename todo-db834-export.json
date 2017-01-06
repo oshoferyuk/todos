@@ -1,34 +1,41 @@
 {
+  "master":[{
+    "ability":"go"
+  },{
+    "ability":"fight"
+  },{
+    "ability":"fly"
+  }],
   "todos1" : [ {
-    "description" : "aaad",
+    "description" : "go shoping d",
     "done" : "false",
     "priority" : 2,
-    "todo" : "aaa"
+    "todo" : "go shoping"
   }, {
-    "description" : "bbbd",
+    "description" : "read book d",
     "done" : "false",
     "priority" : 1,
-    "todo" : "bbb"
+    "todo" : "read book"
   }, {
-    "description" : "cccd",
+    "description" : "do homework d",
     "done" : "false",
     "priority" : 6,
-    "todo" : "ccc"
+    "todo" : "do homework"
   } ],
   "todos2" : [ {
-    "description" : "111d",
+    "description" : "rest d",
     "done" : "true",
     "priority" : 2,
-    "todo" : "111"
+    "todo" : "rest"
   }, {
-    "description" : "222d",
+    "description" : "sleep d",
     "done" : "true",
     "priority" : 5,
-    "todo" : "222"
+    "todo" : "sleep"
   }, {
-    "description" : "333d",
+    "description" : "have fun d",
     "done" : "true",
     "priority" : 4,
-    "todo" : "333"
+    "todo" : "have fun"
   } ]
 }
