@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth.service';
 import {FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-singin',
@@ -25,7 +26,10 @@ import {FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class SinginComponent implements OnInit {
   signForm:FormGroup;
-  constructor(private fb: FormBuilder, private auth: AuthService) { }
+  
+  constructor(private router:Router,
+          private fb: FormBuilder, 
+          private auth: AuthService) { }
 
   ngOnInit() {
     this.signForm = new FormGroup({
@@ -36,6 +40,7 @@ export class SinginComponent implements OnInit {
 
   onSignin() {
       this.auth.signin(this.signForm.value);
-    }
+      this.router.navigate(['/']);  
+  }
 
 }

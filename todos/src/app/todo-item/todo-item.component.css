@@ -36,3 +36,7 @@ li {
 button, input[type="checkbox"] {
     outline: none;
 }
+
+.linethrough{
+    text-decoration: line-through;
+}

@@ -5,3 +5,8 @@
 .active2>a:hover{
 	color:blue;
 }
+
+img#inav{
+	margin-top:5px;
+	margin-left:10px;
+}

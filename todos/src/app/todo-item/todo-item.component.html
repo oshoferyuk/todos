@@ -1,5 +1,5 @@
-<div class="view">		
-	<input type="checkbox" data-hook="checkbox" class="toggle" data-off-icon-cls="gluphicon-thumbs-down" data-on-icon-cls="gluphicon-thumbs-up" [checked]="item.done == 'true' ">	
-	<label data-hook="title" highlight (dblclick)="detailHandler(item)" #itemLbl> {{item.name}}</label>
-	<button data-hook="action-delete" class="destroy" type="button" (click)="destroyHandler(item)"></button>
+<div class="view">	
+	<input type="checkbox" (click)="onToggle(item)" class="toggle" data-off-icon-cls="gluphicon-thumbs-down" data-on-icon-cls="gluphicon-thumbs-up" [checked]="item.state">	
+	<label  highlight (dblclick)="onEdit(item)" #itemLbl [ngClass]="{'linethrough':item.state}"> {{item.name}}</label>
+	<button class="destroy" type="button" (click)="onDelete(item)"></button>
 </div>

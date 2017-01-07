@@ -1,25 +1,25 @@
-<h1>todos</h1>		
 <input (keyup)="onKey($event)" class="new-todo" placeholder="What needs to be done?">	
 <section id="todoapp">
 <ul id="todo-list">
-	<li *ngFor="let todo of todos">
-		<app-todo-item [item]="todo" (todoCompleted)="todoDelete($event)"></app-todo-item>
+	<li *ngFor="let todo of todos | status:state">		
+        <app-todo-item [item]="todo" (todoTogle)="todoTogle($event)" (todoDelete)="todoDelete($event)"></app-todo-item>
 	</li>
 </ul>
 </section>
 <footer id="footer" data-anddom-display="" style="">
-                <span id="todo-count" data-hook="todo-count"><strong>6</strong> items left</span>
+                <span *ngIf="todos.length != 0" id="todo-count" data-hook="todo-count"><strong>{{todos.length}}</strong> item(s)</span>
                 <ul id="filters">
+                    
                     <li>
-                        <a class="selected" href="#/" data-hook="all-mode">All</a>
+                        <a #all (click)="onAll()" [ngClass]="{'selected': state == 0 }" href="#">All</a>
                     </li>
                     <li>
-                        <a href="#/active" data-hook="active-mode" class="">Active</a>
+                        <a #active (click)="onActive()" [ngClass]="{'selected': state == 1 }" href="#"  class="">Active</a>
                     </li>
                     <li>
-                        <a href="#/completed" data-hook="completed-mode" class="">Completed</a>
+                        <a #completed (click)="onCompleted()" href="#" [ngClass]="{'selected': state == 2 }">Completed</a>
                     </li>
                 </ul>
-                <button id="clear-completed" data-hook="clear-completed" data-anddom-display="" style="display: none;" data-anddom-hidden="true">Clear completed</button>
+                <button id="clear-completed" style="display: none;">Clear completed</button>
             </footer>
 <router-outlet></router-outlet>

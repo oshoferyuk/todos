@@ -1,16 +1,16 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">      
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active" *ngIf="isNotAuth()"><a [routerLink]="['signin']"> Sign In </a></li>
-        <li class="active" *ngIf="isNotAuth()"><a [routerLink]="['signup']"> Sign Up </a></li>        
-        <li class="active" *ngIf="!isNotAuth()"><a (click)="onLogout()"> Log out </a></li>
-        </ul>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">      
+      <div class="center">
+        <a *ngIf="isNotAuth()" [routerLink]="['signin']"> Sign In </a>
+        <a *ngIf="isNotAuth()" [routerLink]="['signup']"> Sign Up </a>        
+        <a *ngIf="!isNotAuth()" (click)="onLogout()"> Log out </a>        
+      </div>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
 <footer class="info">
-			<p>Double-click to edit a todo</p>
+			<p>2016</p>
 			<p>Created by oshoferyuk using <a href="http://angular.io">Angular2</a></p>
 </footer>

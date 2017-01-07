@@ -8,8 +8,8 @@ const MASTER_ROUTES: Routes = [
   { path: '',
     component: MasterComponent,
     children: [
-      { path: 'd',    component: DetailComponent },
-      { path: 'e', component: EditComponent }
+      { path: 'detail',    component: DetailComponent },
+      { path: 'edit', component: EditComponent }
     ]
   }
 ];

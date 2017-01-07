@@ -48,9 +48,12 @@ input[type="checkbox"] {
 
 .todoapp {
 	background: #fff;
-	max-width:500px;
-	margin: 130px 0 40px 0;
-	position: relative;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    /* margin: 130px 0 40px 0; */
+    position: relative;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
 	            0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
@@ -666,6 +669,7 @@ label[for='toggle-all'] {
 	border-top: 1px solid #e6e6e6;
 }
 
+
 #footer:before {
 	content: '';
 	position: absolute;
@@ -793,3 +797,15 @@ html #clear-completed:active {
 #todo-list li .destroy::after {
     content: "×";
 }
+
+.center {
+    margin: auto;
+    width: 50%;    
+    padding: 10px;
+	text-align: center;
+}
+
+ 
+.nav a{ 
+    font-size: 0.8em !important;
+    }

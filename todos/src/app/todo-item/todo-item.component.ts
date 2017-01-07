@@ -9,23 +9,28 @@ import { Todo } from '../todo';
 })
 export class TodoItemComponent implements OnInit {
 	@Input() item:Todo;	 
-	@Output() todoCompleted = new EventEmitter<Todo>();
-    @ViewChild('itemLbl') itemLabel:HTMLElement;
+	@Output() todoDelete = new EventEmitter<Todo>();
+  @Output() todoTogle = new EventEmitter<Todo>();	
+	@ViewChild('itemLbl') itemLabel:HTMLElement;
 
 
 
   constructor() { }
 
-	destroyHandler(todo:Todo){		
-		this.todoCompleted.emit(todo);
+	onDelete(todo:Todo){		
+		this.todoDelete.emit(todo);
 	}
-	detailHandler(item){
+	
+	onEdit(item){
 		//let's pretend we have no item
 		console.log(this.itemLabel);
 		let label:string = this.itemLabel.textContent;
 		
 	}
-
+	
+	onToggle(todo:Todo){
+		this.todoTogle.emit(todo);
+	}
   ngOnInit() {
   }
 

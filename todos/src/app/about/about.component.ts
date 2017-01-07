@@ -9,7 +9,7 @@ import { ComponentCanDeactivate } from './about.guard';
 })
 export class AboutComponent implements OnInit, ComponentCanDeactivate {  
   
-	private isConf: boolean = false;
+	private isConf: boolean = true;
   
   constructor(private router:Router) { }
 

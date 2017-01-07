@@ -34,6 +34,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SingupComponent } from './auth/singup.component';
 import { AuthService } from './auth/auth.service';
 import {MasterModule} from './master/master.module';
+import { StatusPipe } from './home/status.pipe';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import {MasterModule} from './master/master.module';
     HeroSlaveServiceComponent,
     SinginComponent,
     FooterComponent,
-    SingupComponent    
+    SingupComponent,
+    StatusPipe    
   ],
   entryComponents: [DialogResultExampleDialog],
 
