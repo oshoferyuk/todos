@@ -1,0 +1,74 @@
+*** GENERATOR DEMYSTIFYING ***
+
+First send value is not setted.
+
+function *generator(){
+  var i = yield 1;  
+  console.log(i);
+}
+
+
+let it = generator();
+it.next('VALUE IS NOT SENDED');
+it.next('this is value for i!');
+
+
+/////////////////g + cb
+
+function testCb(){
+  setTimeout(()=>{
+    it.next(9);
+  },3000)  
+}
+
+
+function *generator(){
+  var i = yield testCb();  
+  console.log(i);
+}
+
+
+let it = generator();
+it.next();//start
+
+
+////////////////g + promise
+
+
+
+
+
+let p = new Promise((res, rej) =>{
+  setTimeout(()=>{    
+    console.log('cb');
+    res(6);
+  }, 3000);
+})
+
+
+
+function *main(){
+  let r = yield p;
+}
+
+
+
+function runG(g){
+  var it = g(), ret;  
+  (function iterate(val){
+    console.log('zzzzzzz');
+      ret = it.next(val);
+    
+    if(!ret.done){          
+       ret.value.then(iterate);
+    }else{
+      
+    }
+	
+	
+    
+  }());
+  
+}
+
+runG(main);
